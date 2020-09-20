@@ -175,13 +175,13 @@ class _ItemTagsState extends State<ItemTags> {
           DataList(
               title: widget.title,
               index: widget.index,
-              active: widget.singleItem ? false : widget.active,
+              active: widget.active,
               customData: widget.customData));
     } else if (_dataListInherited.list.elementAt(widget.index) == null) {
       //print("replace");
       _dataListInherited.list[widget.index] = DataList(
           title: widget.title,
-          active: widget.singleItem ? false : widget.active,
+          active: widget.active,
           customData: widget.customData);
     }
 
@@ -241,11 +241,11 @@ class _ItemTagsState extends State<ItemTags> {
             child: _combine),
         onTap: widget.pressEnabled
             ? () {
+                _dataList.active = !_dataList.active;
+
                 if (widget.singleItem) {
                   _singleItem(_dataListInherited, _dataList);
-                  _dataList.active = true;
-                } else
-                  _dataList.active = !_dataList.active;
+                }
 
                 if (widget.onPressed != null)
                   widget.onPressed(Item(
